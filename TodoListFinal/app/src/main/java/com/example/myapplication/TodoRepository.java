@@ -33,7 +33,7 @@ public class TodoRepository {
         new DeleteTodoAsyncTask(todoDao).execute(todo);
     }
 
-    public void deleteAllNotes(){
+    public void deleteAllTodos(){
         new DeleteAllTodoAsyncTask(todoDao).execute();
     }
 
