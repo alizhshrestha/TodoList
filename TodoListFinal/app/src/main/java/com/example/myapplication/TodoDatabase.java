@@ -8,7 +8,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Todo.class}, version = 1)
+import java.util.Calendar;
+
+@Database(entities = {Todo.class}, version = 2)
 public abstract class TodoDatabase extends RoomDatabase {
 
     private static TodoDatabase instance;
@@ -45,10 +47,10 @@ public abstract class TodoDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            todoDao.insert(new Todo("Your todo name", "todo description", 1));
-            todoDao.insert(new Todo("Your todo name2", "todo description2", 2));
-            todoDao.insert(new Todo("Your todo name3", "todo description3", 3));
-            todoDao.insert(new Todo("Your todo name4", "todo description4", 4));
+            todoDao.insert(new Todo("Your todo name", "todo description", String.valueOf(Calendar.DATE), 1));
+            todoDao.insert(new Todo("Your todo name2", "todo description2", String.valueOf(Calendar.DATE), 2));
+            todoDao.insert(new Todo("Your todo name3", "todo description3", String.valueOf(Calendar.DATE), 3));
+            todoDao.insert(new Todo("Your todo name4", "todo description4", String.valueOf(Calendar.DATE), 4));
             return null;
         }
     }

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //update our RecyclerView
 //                Toast.makeText(MainActivity.this,
 //////                        "OnChanged", Toast.LENGTH_LONG).show();
-                adapter.setTodos(todos);
+                adapter.submitList(todos);
             }
         });
 
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditTodoActivity.EXTRA_ID, todo.getId());
                 intent.putExtra(AddEditTodoActivity.EXTRA_TITLE, todo.getName());
                 intent.putExtra(AddEditTodoActivity.EXTRA_DESCRIPTION, todo.getDescription());
+                intent.putExtra(AddEditTodoActivity.EXTRA_TIME, todo.getTime());
                 intent.putExtra(AddEditTodoActivity.EXTRA_PRIORITY, todo.getPriority());
                 startActivityForResult(intent, EDIT_TODO_REQUEST);
             }
@@ -91,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ADD_TODO_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddEditTodoActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditTodoActivity.EXTRA_DESCRIPTION);
+            String time = data.getStringExtra(AddEditTodoActivity.EXTRA_TIME);
             int priority = data.getIntExtra(AddEditTodoActivity.EXTRA_PRIORITY, 1);
 
-            Todo todo = new Todo(title, description, priority);
+            Todo todo = new Todo(title, description,time, priority);
             todoViewModel.insert(todo);
 
             Toast.makeText(this, "Todo activity saved", Toast.LENGTH_SHORT).show();
@@ -107,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
             String title = data.getStringExtra(AddEditTodoActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditTodoActivity.EXTRA_DESCRIPTION);
+            String time = data.getStringExtra(AddEditTodoActivity.EXTRA_TIME);
             int priority = data.getIntExtra(AddEditTodoActivity.EXTRA_PRIORITY, 1);
 
-            Todo todo = new Todo(title, description, priority);
+            Todo todo = new Todo(title, description, time, priority);
             todo.setId(id);
 
             todoViewModel.update(todo);
