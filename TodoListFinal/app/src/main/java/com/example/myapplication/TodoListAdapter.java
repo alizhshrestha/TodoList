@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
@@ -7,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,8 @@ public class TodoListAdapter extends ListAdapter<Todo, TodoListAdapter.TodoListH
         @Override
         public boolean areContentsTheSame(@NonNull Todo todo, @NonNull Todo t1) {
             return todo.getName().equals(t1.getName()) && todo.getDescription().equals(t1.getDescription())
-                    && todo.getTime().equals(t1.getTime()) && todo.getPriority() == t1.getPriority();
+                    && todo.getTime().equals(t1.getTime()) &&
+                    todo.getPriority() == t1.getPriority();
         }
     };
 

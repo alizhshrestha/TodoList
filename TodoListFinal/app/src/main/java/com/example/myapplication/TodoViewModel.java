@@ -3,7 +3,11 @@ package com.example.myapplication;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,4 +41,5 @@ public class TodoViewModel extends AndroidViewModel {
     public LiveData<List<Todo>> getAllTodos(){
         return allTodos;
     }
+
 }

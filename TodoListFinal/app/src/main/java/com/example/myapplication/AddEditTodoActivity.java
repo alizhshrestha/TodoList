@@ -56,8 +56,6 @@ public class AddEditTodoActivity extends AppCompatActivity {
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
 
-    private Button image_button;
-    private ImageView imageView;
     private ImageButton mVoiceBtn;
 
     private int day;
@@ -79,28 +77,26 @@ public class AddEditTodoActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         numberPickerPriority = findViewById(R.id.number_picker_priority);
-        image_button = findViewById(R.id.image_button);
-        imageView = (ImageView) findViewById(R.id.todo_imageView);
         mVoiceBtn = findViewById(R.id.voiceBtn);
         mDisplayDate = findViewById(R.id.edit_text_time);
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AddEditTodoActivity.this,
-                        android.R.style.Theme_DeviceDefault_Dialog,
-                        mDateSetListener,
-                        year, month, day
-                );
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
+//        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Calendar cal = Calendar.getInstance();
+//                int year = cal.get(Calendar.YEAR);
+//                int month = cal.get(Calendar.MONTH);
+//                int day = cal.get(Calendar.DAY_OF_MONTH);
+//
+//                DatePickerDialog dialog = new DatePickerDialog(
+//                        AddEditTodoActivity.this,
+//                        android.R.style.Theme_DeviceDefault_Dialog,
+//                        mDateSetListener,
+//                        year, month, day
+//                );
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                dialog.show();
+//            }
+//        });
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -181,42 +177,43 @@ public class AddEditTodoActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public void selectImage(View view) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
-                    PackageManager.PERMISSION_DENIED) {
-                String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                requestPermissions(permissions, PERMISSION_CODE);
-            } else {
-                pickImageFromGallery();
-            }
-        } else {
-            pickImageFromGallery();
-        }
-
-    }
-
-    private void pickImageFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_PICK_CODE);
-    }
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
-            case PERMISSION_CODE:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    pickImageFromGallery();
-                }else{
-                    Toast.makeText(this, "Permission denied..!", Toast.LENGTH_SHORT).show();
-                }
-        }
-    }
+//
+//    public void selectImage(View view) {
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+//                    PackageManager.PERMISSION_DENIED) {
+//                String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+//                requestPermissions(permissions, PERMISSION_CODE);
+//            } else {
+//                pickImageFromGallery();
+//            }
+//        } else {
+//            pickImageFromGallery();
+//        }
+//
+//    }
+//
+//    private void pickImageFromGallery() {
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        Uri image_path = intent.getData();
+//        startActivityForResult(intent, IMAGE_PICK_CODE);
+//    }
+//
+//
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch(requestCode){
+//            case PERMISSION_CODE:
+//                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                    pickImageFromGallery();
+//                }else{
+//                    Toast.makeText(this, "Permission denied..!", Toast.LENGTH_SHORT).show();
+//                }
+//        }
+//    }
 
 
 
@@ -225,9 +222,6 @@ public class AddEditTodoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            imageView.setImageURI(data.getData());
-        }
 
         switch(requestCode){
             case REQUEST_CODE_SPEECH_INPUT:
@@ -265,5 +259,21 @@ public class AddEditTodoActivity extends AppCompatActivity {
             //get message of error and show
             Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void selectDate(View view) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                AddEditTodoActivity.this,
+                android.R.style.Theme_DeviceDefault_Dialog,
+                mDateSetListener,
+                year, month, day
+        );
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

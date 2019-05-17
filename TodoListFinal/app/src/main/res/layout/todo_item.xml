@@ -46,5 +46,11 @@
             android:text="1/1/1111"
             />
 
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_time"/>
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

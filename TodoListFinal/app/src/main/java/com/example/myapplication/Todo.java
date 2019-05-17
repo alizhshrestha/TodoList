@@ -2,6 +2,13 @@ package com.example.myapplication;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BindingAdapter;
+import android.net.Uri;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import java.net.URI;
 
 @Entity (tableName = "todo_table")
 public class Todo {
@@ -16,6 +23,7 @@ public class Todo {
     private String time;
 
     private int priority;
+
 
     public Todo(String name, String description, String time, int priority) {
         this.name = name;
@@ -32,6 +40,7 @@ public class Todo {
         return time;
     }
 
+
     public int getId() {
         return id;
     }
@@ -47,4 +56,5 @@ public class Todo {
     public int getPriority() {
         return priority;
     }
+
 }

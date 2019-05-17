@@ -5,12 +5,14 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-@Database(entities = {Todo.class}, version = 2)
+@Database(entities = {Todo.class}, version = 3)
 public abstract class TodoDatabase extends RoomDatabase {
 
     private static TodoDatabase instance;
